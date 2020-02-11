@@ -125,13 +125,14 @@ def predict(request):
     write = open(file_path, 'wb')
     write.write(f.body)
     img = open_image(file_path)
-    image = cv2.imread(file_path)
-    mask = learn.predict(img)[0]
-    mask = (mask.data.numpy()*255).astype('uint8')
-    mask = np.moveaxis(mask, -1,0).squeeze()
-    mask= mask.transpose()
-    image[mask>0] =255
-    cv2.imwrite(file_path,image)
+    im = learn.predict(img)[2].numpy()
+    im = im[1:]*255
+    im = np.moveaxis(im, -1,0).squeeze()
+    im=im.transpose()
+    im = cv2.cvtColor(im,cv2.COLOR_GRAY2RGB)
+    image =cv2.imread(file_path)
+    dst = cv2.addWeighted(image/255, 0.5, im, 0.5, 0,  dtype = cv2.CV_32F)
+    cv2.imwrite(file_path,dst*255)
     status = 'detected'
     if  learn.predict(img)[0].data.sum()> 0 :            
         print('Pneumothorax detected')
