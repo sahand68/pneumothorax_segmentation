@@ -1,0 +1,13 @@
+
+Werkzeug
+numpy
+Jinja2
+gevent
+sanic
+fastai
+Pillow==6.2.2
+h5py
+python-multipart
+opencv-contrib-python
+matplotlib
+
