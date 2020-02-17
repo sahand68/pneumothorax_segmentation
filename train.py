@@ -265,7 +265,6 @@ def get_data(fold):
     return data
 
 # Display some images with masks
-get_data(0).show_batch()
 
 data = get_data(fold)
 learn = unet_learner(data, models.resnet34, metrics=[dice])
