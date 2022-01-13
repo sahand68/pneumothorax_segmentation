@@ -5,7 +5,7 @@ Jinja2
 gevent
 sanic
 fastai
-Pillow==6.2.2
+Pillow==9.0.0
 h5py
 python-multipart
 opencv-contrib-python
